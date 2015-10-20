@@ -108,11 +108,6 @@ inline void COperation(deque<string> &operationDeque, bool visitedMap[], string 
 
 inline void operation(deque<string> &operationDeque, bool visitedMap[], string &goalMatrix, int maxDepth) {
 
-    if (maxDepth == 0) {
-        cout << "-1" << endl;
-        return;
-    }
-
     while (operationDeque.size()) {
         string currentMatrix = operationDeque.front();
         operationDeque.pop_front();
@@ -128,9 +123,14 @@ inline void operation(deque<string> &operationDeque, bool visitedMap[], string &
             return;
         }
 
-        COperation(operationDeque, visitedMap, currentMatrix, maxDepth);
-        BOperation(operationDeque, visitedMap, currentMatrix, maxDepth);
+        if (maxDepth == 0) {
+            cout << "-1" << endl;
+            return;
+        }
+
         AOperation(operationDeque, visitedMap, currentMatrix, maxDepth);
+        BOperation(operationDeque, visitedMap, currentMatrix, maxDepth);
+        COperation(operationDeque, visitedMap, currentMatrix, maxDepth);
     }
 
     cout << "-1" << endl;
